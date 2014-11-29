@@ -26,6 +26,7 @@ type Htmlpage struct {
 	Created string
 	Updated string
 	Paragraphs []Paragraph
+	Pushsite string
 	
 }
 

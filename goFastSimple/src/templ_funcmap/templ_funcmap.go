@@ -17,6 +17,15 @@ func FirstWord(s string) string {
 
 }
 
+func SecondWordFromTitle(s string) string {
+
+	words := strings.Fields(s)
+
+	return comutils.UpcaseInitial(words[1])
+
+}
+
+
 func FirstWordFromSenteces(s []string) string {
 
 	words := strings.Fields(s[0])

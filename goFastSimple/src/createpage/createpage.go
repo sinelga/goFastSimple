@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"domains"
 	"findfreeparagraph"
-//	"fmt"
+	"fmt"
 	"html/template"
 	"log/syslog"
 	"templ_funcmap"
@@ -19,12 +19,13 @@ func CreateHtmlPage(golog syslog.Writer, locale string, themes string, bot strin
 	var page string
 	var mediablock string
 
-	base = "/home/juno/git/goFastCgiLight/goFastCgiLight/templ/" + locale + "/" + themes + "/" + variant + "/base.html"
-	page = "/home/juno/git/goFastCgiLight/goFastCgiLight/templ/" + locale + "/" + themes + "/" + variant + "/page.html"
-	mediablock = "/home/juno/git/goFastCgiLight/goFastCgiLight/templ/" + locale + "/" + themes + "/" + variant + "/mediablock.html"
+	base = "/home/juno/git/goFastSimple/goFastSimple/templ/" + locale + "/" + themes + "/" + variant + "/base.html"
+	page = "/home/juno/git/goFastSimple/goFastSimple/templ/" + locale + "/" + themes + "/" + variant + "/page.html"
+	mediablock = "/home/juno/git/goFastSimple/goFastSimple/templ/" + locale + "/" + themes + "/" + variant + "/mediablock.html"
 
 	funcMap := template.FuncMap{
 		"FirstWord":                  templ_funcmap.FirstWord,
+		"SecondWordFromTitle":		  templ_funcmap.SecondWordFromTitle,	
 		"FirstWordFromSenteces":      templ_funcmap.FirstWordFromSenteces,
 		"FirstWordFromAllParagraphs": templ_funcmap.FirstWordFromAllParagraphs,
 	}
@@ -48,6 +49,9 @@ func CreateHtmlPage(golog syslog.Writer, locale string, themes string, bot strin
 	
 	currenttime := time.Now().Local()
 	
+	fmt.Println("Pushsite ",paragraph.Pushsite)
+	fmt.Println("Ptittle ",paragraph.Ptitle)
+	
 
 	htmlpage := domains.Htmlpage{
 		Locale:     locale,
@@ -56,6 +60,7 @@ func CreateHtmlPage(golog syslog.Writer, locale string, themes string, bot strin
 		Paragraphs: paragrapharr,
 		Created: currenttime.Format("2006-01-02 15:04:05"),
 		Updated: currenttime.Format("2006-01-02 15:04:05"),
+		Pushsite: paragraph.Pushsite,
 	}
 
 	if err := index.Execute(webpage, htmlpage); err != nil {
