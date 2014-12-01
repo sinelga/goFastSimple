@@ -1,14 +1,25 @@
 package domains
 
-import ()
+import (
+	"encoding/xml"
+//	"time"
+	)
 
-type Site struct {
-	Pathinfo   string
-	Created    int64
-	Updated    int64
-	Hits       int
-	Paragraphs []Paragraph
+//type Site struct {
+//	Pathinfo   string
+//	Created    int64
+//	Updated    int64
+//	Hits       int
+//	Paragraphs []Paragraph
+//}
+
+type Keyword struct {
+	
+	Keyword string
+	Hits int	
+	
 }
+
 
 type Paragraph struct {
 	Ptitle     string
@@ -30,27 +41,48 @@ type Htmlpage struct {
 	
 }
 
-type SiteQue struct {
-	Locale   string
-	Themes   string
-	Domain   string
-	Pathinfo string
+type Pages struct {
+//	Version string   `xml:"version,attr"`			
+	XMLName    xml.Name `xml:"urlset"`
+	XmlNS      string   `xml:"xmlns,attr"`
+//	XmlImageNS string   `xml:"xmlns:image,attr"`
+//	XmlNewsNS  string   `xml:"xmlns:news,attr"`
+	Pages      []*Page  `xml:"url"`
 }
 
-type Domaincsv struct {
-	Locale string
-	Themes string
-	Domain string
-	Ip     string
+type Page struct {
+	XMLName    xml.Name `xml:"url"`
+	Loc        string   `xml:"loc"`
+	Lastmod    string `xml:"lastmod"`
+//	Name       string   `xml:"news:news>news:publication>news:name"`
+//	Language   string   `xml:"news:news>news:publication>news:language"`
+//	Title      string   `xml:"news:news>news:title"`
+//	Keywords   string   `xml:"news:news>news:keywords"`
+//	Image      string   `xml:"image:image>image:loc"`
 }
 
-type Sitetohomepage struct {
-	Locale string
-	Themes string
-	Site   string
-	Pages  []string
-	Paragraph []Paragraph
-	Variant int
-	Created string
-	Updated string
-}
+
+//type SiteQue struct {
+//	Locale   string
+//	Themes   string
+//	Domain   string
+//	Pathinfo string
+//}
+
+//type Domaincsv struct {
+//	Locale string
+//	Themes string
+//	Domain string
+//	Ip     string
+//}
+
+//type Sitetohomepage struct {
+//	Locale string
+//	Themes string
+//	Site   string
+//	Pages  []string
+//	Paragraph []Paragraph
+//	Variant int
+//	Created string
+//	Updated string
+//}

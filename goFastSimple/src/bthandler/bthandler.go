@@ -7,6 +7,7 @@ import (
 	"log/syslog"
 	"net/http"
 	"strings"
+	"sitemaphandler"
 )
 
 func BTrequestHandler(golog syslog.Writer, resp http.ResponseWriter, req *http.Request, locale string, themes string, site string, pathinfo string, bot string, startparameters []string, blocksite bool,variant string) {
@@ -26,9 +27,18 @@ func BTrequestHandler(golog syslog.Writer, resp http.ResponseWriter, req *http.R
 
 		resp.Write(bytepage)
 
+	} else if strings.HasSuffix(pathinfoclean, "sitemap.xml")  {
+		
+		
+		bytepage =sitemaphandler.Create(golog, locale, themes,site,startparameters)
+		resp.Header().Add("Content-type","text/xml")
+		resp.Write(bytepage)
+		
 	} else {
-
+		
 		resp.WriteHeader(404)
+		
+		
 	}
 
 //	if strings.HasSuffix(pathinfoclean, ".html") {
