@@ -32,7 +32,7 @@ func main() {
 	themes := *themesFlag
 	hitsint := *hitsFlag
 
-	db, err := sql.Open("sqlite3", "/home/juno/git/goFastCgi/goFastCgi/singo.db")
+	db, err := sql.Open("sqlite3", "/home/juno/git/goFastCgiLight/goFastCgiLight/singo.db")
 	if err != nil {
 		log.Fatal(err)
 	}
