@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"strings"
 	"sitemaphandler"
+	"robots_txt"
 )
 
 func BTrequestHandler(golog syslog.Writer, resp http.ResponseWriter, req *http.Request, locale string, themes string, site string, pathinfo string, bot string, startparameters []string, blocksite bool,variant string) {
@@ -34,10 +35,17 @@ func BTrequestHandler(golog syslog.Writer, resp http.ResponseWriter, req *http.R
 		resp.Header().Add("Content-type","text/xml")
 		resp.Write(bytepage)
 		
+	} else if strings.HasSuffix(pathinfoclean, "robots.txt") {
+		
+		
+		bytepage =robots_txt.Create(golog, locale, themes,site)
+		resp.Header().Add("Content-type","text/plain")
+		resp.Write(bytepage)
+		
+		
 	} else {
 		
 		resp.WriteHeader(404)
-		
 		
 	}
 

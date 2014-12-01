@@ -10,18 +10,18 @@ import (
 	"findkeywords"
 	"sitemappathes"
 	"bytes"
-	"strconv"
+//	"strconv"
 )
 
 func Create(golog syslog.Writer, locale string,themes string,site string,startparameters []string) []byte  {
 	
 	keywordsarr := findkeywords.GetAll(golog,locale,themes,startparameters)
 	
-	golog.Info("sitemaphandler:keywordsarr "+strconv.Itoa(len(keywordsarr) ))
+//	golog.Info("sitemaphandler:keywordsarr "+strconv.Itoa(len(keywordsarr) ))
 	
 	pathesarr :=sitemappathes.CreatePathes(golog,keywordsarr)
 	
-	golog.Info("sitemaphandler:pathesarr  "+strconv.Itoa(len(pathesarr) ))
+//	golog.Info("sitemaphandler:pathesarr  "+strconv.Itoa(len(pathesarr) ))
 
 	docList := new(domains.Pages)
 	docList.XmlNS ="http://www.sitemaps.org/schemas/sitemap/0.9"
