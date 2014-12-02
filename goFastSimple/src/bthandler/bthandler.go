@@ -24,7 +24,7 @@ func BTrequestHandler(golog syslog.Writer, resp http.ResponseWriter, req *http.R
 	var bytepage []byte
 	if strings.HasSuffix(pathinfoclean, ".html")  {
 
-		bytepage = createpage.CreateHtmlPage(golog, locale, themes, bot, startparameters,blocksite,variant)
+		bytepage = createpage.CreateHtmlPage(golog, locale, themes,site, bot, startparameters,blocksite,variant)
 
 		resp.Write(bytepage)
 

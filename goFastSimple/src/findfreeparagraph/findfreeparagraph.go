@@ -5,10 +5,11 @@ import (
 	"encoding/json"
 	"github.com/garyburd/redigo/redis"
 	"log/syslog"
+	"strconv"
 )
 
 
-func FindFromQ(golog syslog.Writer, locale string, themes string, bot string,startparameters []string) domains.Paragraph {
+func FindFromQ(golog syslog.Writer, locale string, themes string,site string, bot string,startparameters []string) domains.Paragraph {
 
 	redisprotocol := startparameters[0]
 	redishost := startparameters[1]
@@ -61,7 +62,29 @@ func FindFromQ(golog syslog.Writer, locale string, themes string, bot string,sta
 					}
 
 				}
-
+				
+				if bot=="google" {
+										
+					if googlehits,err := redis.Int(c.Do("ZINCRBY",bot , "1", site)); err != nil {
+						
+						golog.Crit("FindFromQ: " + err.Error())
+					} else {
+												
+						
+						
+						if googlehits > 5 {
+							
+							golog.Info("google hit??? > 500 block "+site+" "+strconv.Itoa(googlehits))
+							
+							unmarPar.Plocallink=""
+							
+						}
+												
+						
+					}				
+					
+				}
+																				
 			}
 
 		} else {

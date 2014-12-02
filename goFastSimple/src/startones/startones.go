@@ -15,7 +15,7 @@ import (
 //	sitestoblock := make(map[string]struct{})
 	
 
-	content, err := ioutil.ReadFile("/home/juno/git/goFastCgiLight/goFastCgiLight/config.txt")
+	content, err := ioutil.ReadFile("/home/juno/git/goFastSimple/goFastSimple/config.txt")
 	if err != nil {
 		//Do something
 		golog.Err(err.Error())

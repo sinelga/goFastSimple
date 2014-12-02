@@ -4,14 +4,14 @@ import (
 	"bytes"
 	"domains"
 	"findfreeparagraph"
-	"fmt"
+//	"fmt"
 	"html/template"
 	"log/syslog"
 	"templ_funcmap"
 	"time"
 )
 
-func CreateHtmlPage(golog syslog.Writer, locale string, themes string, bot string, startparameters []string, blocksite bool, variant string) []byte {
+func CreateHtmlPage(golog syslog.Writer, locale string, themes string,site string, bot string, startparameters []string, blocksite bool, variant string) []byte {
 
 	var paragrapharr []domains.Paragraph
 
@@ -36,7 +36,7 @@ func CreateHtmlPage(golog syslog.Writer, locale string, themes string, bot strin
 		mediablock,
 	)
 
-	paragraph := findfreeparagraph.FindFromQ(golog, locale, themes, bot, startparameters)
+	paragraph := findfreeparagraph.FindFromQ(golog, locale, themes, site,"google", startparameters)
 
 	if blocksite {
 
@@ -49,8 +49,8 @@ func CreateHtmlPage(golog syslog.Writer, locale string, themes string, bot strin
 	
 	currenttime := time.Now().Local()
 	
-	fmt.Println("Pushsite ",paragraph.Pushsite)
-	fmt.Println("Ptittle ",paragraph.Ptitle)
+//	fmt.Println("Pushsite ",paragraph.Pushsite)
+//	fmt.Println("Ptittle ",paragraph.Ptitle)
 	
 
 	htmlpage := domains.Htmlpage{
