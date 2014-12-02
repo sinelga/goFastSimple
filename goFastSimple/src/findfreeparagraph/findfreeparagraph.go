@@ -13,6 +13,7 @@ func FindFromQ(golog syslog.Writer, locale string, themes string,site string, bo
 
 	redisprotocol := startparameters[0]
 	redishost := startparameters[1]
+	blockhitlimitstr := startparameters[2]
 
 	c, err := redis.Dial(redisprotocol, redishost)
 	if err != nil {
@@ -63,18 +64,19 @@ func FindFromQ(golog syslog.Writer, locale string, themes string,site string, bo
 
 				}
 				
-				if bot=="google" {
+//				if bot=="google" {
 										
-					if googlehits,err := redis.Int(c.Do("ZINCRBY",bot , "1", site)); err != nil {
+					if hits,err := redis.Int(c.Do("ZINCRBY",bot , "1", site)); err != nil {
 						
 						golog.Crit("FindFromQ: " + err.Error())
 					} else {
 												
 						
+						blockhitlimit_int,_ :=strconv.Atoi(blockhitlimitstr)	
 						
-						if googlehits > 5 {
+						if hits > blockhitlimit_int {
 							
-							golog.Info("google hit??? > 500 block "+site+" "+strconv.Itoa(googlehits))
+							golog.Info(bot +" hit??? > "+site+" "+strconv.Itoa(hits)+" limit "+blockhitlimitstr)
 							
 							unmarPar.Plocallink=""
 							
@@ -83,7 +85,7 @@ func FindFromQ(golog syslog.Writer, locale string, themes string,site string, bo
 						
 					}				
 					
-				}
+//				}
 																				
 			}
 
