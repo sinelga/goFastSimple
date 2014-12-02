@@ -14,6 +14,8 @@ import (
 func BTrequestHandler(golog syslog.Writer, resp http.ResponseWriter, req *http.Request, locale string, themes string, site string, pathinfo string, bot string, startparameters []string, blocksite bool,variant string) {
 
 	pathinfoclean := clean_pathinfo.CleanPath(golog, pathinfo)
+	
+	golog.Info(site+" "+bot)
 
 //	if blocksite {
 //
