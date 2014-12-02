@@ -36,7 +36,7 @@ func CreateHtmlPage(golog syslog.Writer, locale string, themes string,site strin
 		mediablock,
 	)
 
-	paragraph := findfreeparagraph.FindFromQ(golog, locale, themes, site,"google", startparameters)
+	paragraph := findfreeparagraph.FindFromQ(golog, locale, themes, site,bot, startparameters)
 
 	if blocksite {
 

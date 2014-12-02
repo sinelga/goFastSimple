@@ -1,5 +1,5 @@
 !<arch>
-__.PKGDEF       0           0     0     644     51715     `
+__.PKGDEF       0           0     0     644     51705     `
 go object linux amd64 go1.3.3 X:precisestack
 
 $$
@@ -404,7 +404,7 @@ package bthandler
 	func (@"net/http".r·2 *@"net/http".Request "esc:0x0") @"net/http".wantsClose () (? bool)
 	func (@"net/http".r·2 *@"net/http".Request "esc:0x0") @"net/http".wantsHttp10KeepAlive () (? bool)
 	func (@"net/http".req·2 *@"net/http".Request) @"net/http".write (@"net/http".w·3 @"io".Writer, @"net/http".usingProxy·4 bool, @"net/http".extraHeaders·5 @"net/http".Header "esc:0x0") (? error)
-	func @"".BTrequestHandler (@"".golog·1 @"log/syslog".Writer, @"".resp·2 @"net/http".ResponseWriter, @"".req·3 *@"net/http".Request "esc:0x0", @"".locale·4 string, @"".themes·5 string, @"".site·6 string, @"".pathinfo·7 string, @"".bot·8 string "esc:0x0", @"".startparameters·9 []string "esc:0x0", @"".blocksite·10 bool, @"".variant·11 string)
+	func @"".BTrequestHandler (@"".golog·1 @"log/syslog".Writer, @"".resp·2 @"net/http".ResponseWriter, @"".req·3 *@"net/http".Request "esc:0x0", @"".locale·4 string, @"".themes·5 string, @"".site·6 string, @"".pathinfo·7 string, @"".bot·8 string, @"".startparameters·9 []string "esc:0x0", @"".blocksite·10 bool, @"".variant·11 string)
 	func @"".init ()
 	var @"time".months [12]string
 	var @"time".days [7]string
