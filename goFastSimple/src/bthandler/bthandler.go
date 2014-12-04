@@ -30,7 +30,7 @@ func BTrequestHandler(golog syslog.Writer, resp http.ResponseWriter, req *http.R
 
 		resp.Write(bytepage)
 
-	} else if strings.HasSuffix(pathinfoclean, "sitemap.xml")  {
+	} else if (strings.HasSuffix(pathinfoclean, "sitemap.xml") || strings.HasSuffix(pathinfoclean, "index.xml"))  {
 		
 		
 		bytepage =sitemaphandler.Create(golog, locale, themes,site,startparameters)
