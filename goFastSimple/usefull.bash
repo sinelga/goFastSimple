@@ -87,3 +87,7 @@ git stash drop
 bin/keyws_phrases_loader -locale=fi_FI -themes=porno -hits=50
 bin/syncpushdomaindb -locale=fi_FI -themes=porno -domain=seksitarinat.biz
 
+wget --server-response  --spider http://fb.poika.info
+
+
+
