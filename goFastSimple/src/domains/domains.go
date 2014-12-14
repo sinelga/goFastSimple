@@ -20,6 +20,13 @@ type Keyword struct {
 	
 }
 
+type Phrase struct {
+	
+	Phrase string
+	Hits int	
+	
+}
+
 
 type Paragraph struct {
 	Ptitle     string
@@ -62,27 +69,3 @@ type Page struct {
 }
 
 
-//type SiteQue struct {
-//	Locale   string
-//	Themes   string
-//	Domain   string
-//	Pathinfo string
-//}
-
-//type Domaincsv struct {
-//	Locale string
-//	Themes string
-//	Domain string
-//	Ip     string
-//}
-
-//type Sitetohomepage struct {
-//	Locale string
-//	Themes string
-//	Site   string
-//	Pages  []string
-//	Paragraph []Paragraph
-//	Variant int
-//	Created string
-//	Updated string
-//}

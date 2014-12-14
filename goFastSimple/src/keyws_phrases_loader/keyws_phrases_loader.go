@@ -17,6 +17,7 @@ var themesFlag = flag.String("themes", "", "must be porno/finance/fortune...")
 var hitsFlag = flag.Int("hits", 0, "if not will be 0")
 
 var keywordsarr []domains.Keyword
+var phrasesarr []domains.Phrase
 
 func main() {
 
@@ -58,7 +59,6 @@ func main() {
 
 	}
 	rows.Close()
-	db.Close()
 
 	c, err := redis.Dial("tcp", ":6379")
 	if err != nil {
@@ -76,6 +76,42 @@ func main() {
 		} else {
 
 			//				golog.Info(r)
+			fmt.Println("r ", r)
+
+		}
+
+	}
+
+	sqlstr = "select phrase,hits from phrases where locale='" + locale + "' and themes='" + themes + "' and hits>=0"
+
+	golog.Info(sqlstr)
+
+	rows, err = db.Query(sqlstr)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var phrase string
+		var hits int
+		rows.Scan(&phrase, &hits)
+		phraseObj := domains.Phrase{Phrase: phrase, Hits: hits}
+		phrasesarr = append(phrasesarr, phraseObj)
+
+	}
+	rows.Close()
+	db.Close()
+
+	queuename = locale + ":" + themes + ":phrases"
+
+	for _, phraseObj := range phrasesarr {
+
+		if r, err := c.Do("ZADD", queuename, strconv.Itoa(phraseObj.Hits), phraseObj.Phrase); err != nil {
+			golog.Err("syncpushdomains: " + err.Error())
+
+		} else {
+
 			fmt.Println("r ", r)
 
 		}
