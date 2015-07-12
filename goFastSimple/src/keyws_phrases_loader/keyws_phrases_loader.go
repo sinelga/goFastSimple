@@ -82,7 +82,7 @@ func main() {
 
 	}
 
-	sqlstr = "select phrase,hits from phrases where locale='" + locale + "' and themes='" + themes + "' and hits>=0"
+	sqlstr = "select phrase,hits from phrases where locale='" + locale + "' and themes='" + themes + "' and hits>0"
 
 	golog.Info(sqlstr)
 

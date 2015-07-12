@@ -33,6 +33,7 @@ bin/syncpushdomaindb -locale=fi_FI -themes=porno
 ZRANGEBYSCORE pushdomains -inf +inf withscores  LIMIT 0 10000
 ZRANGEBYSCORE limitsites -inf +inf withscores  LIMIT 0 10000
 ZRANGEBYSCORE fi_FI:porno:keywords -inf +inf withscores  LIMIT 0 10000
+ZRANGEBYSCORE fi_FI:porno:phrases -inf +inf withscores  LIMIT 0 1000000
 ZRANGEBYSCORE google -inf +inf withscores  LIMIT 0 10000
 
 SRANDMEMBER pagetocreate
@@ -66,7 +67,7 @@ SELECT * FROM keywords where themes='porno' and Hits=1 and Updated <
 select Phrase from phrases  group by Phrase having count(*) >1
 
 
-scp /home/juno/git/goFastCgi/goFastCgi/singo.db 104.131.209.134:git/goFastCgiLight/goFastCgiLight
+#scp /home/juno/git/goFastCgi/goFastCgi/singo.db 104.131.209.134:git/goFastCgiLight/goFastCgiLight
 scp /home/juno/git/goFastCgi/goFastCgi/singo.db 104.131.99.251:git/goFastCgiLight/goFastCgiLight
 
 bin/startsite -locale=fi_FI -themes=porno -site= -variant=0
@@ -83,6 +84,10 @@ find www -newer dummy -exec ls -l  {} \;
 git stash save --keep-index
 git stash drop
 
+
+
+del fi_FI:porno:keywords
+del fi_FI:porno:phrases
 
 bin/keyws_phrases_loader -locale=fi_FI -themes=porno -hits=50
 bin/syncpushdomaindb -locale=fi_FI -themes=porno -domain=seksitarinat.biz
