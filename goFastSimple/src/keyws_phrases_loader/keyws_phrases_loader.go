@@ -74,8 +74,6 @@ func main() {
 			golog.Err("syncpushdomains: " + err.Error())
 
 		} else {
-
-			//				golog.Info(r)
 			fmt.Println("r ", r)
 
 		}
