@@ -89,7 +89,11 @@ git stash drop
 del fi_FI:porno:keywords
 del fi_FI:porno:phrases
 
-bin/keyws_phrases_loader -locale=fi_FI -themes=porno -hits=50
+bin/keyws_phrases_loader -locale=fi_FI -themes=porno -hits=15 #number 4314 OK
+
+ZRANGEBYSCORE fi_FI:porno:keywords -inf +inf  #Chech numbers
+
+
 bin/syncpushdomaindb -locale=fi_FI -themes=porno -domain=seksitarinat.biz
 
 wget --server-response  --spider http://fb.poika.info
